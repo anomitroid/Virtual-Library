@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <link rel = "stylesheet" href = "styles/reset.css">
+    <link rel = "stylesheet" href = "styles/styles.css">
+    <link rel = "stylesheet" href = "styles/switch.css">
+    <link rel = "stylesheet" href = "styles/modals.css">
+
+    <script src = "scripts/booksearch.js"></script>
+    <script src = "scripts/local.js" defer></script>
+    <script src = "scripts/modals.js" defer></script>
+    <script src = "scripts/sort.js" defer></script>
+    <script src = "scripts/lib.js" defer></script>
+    <title>My Library</title>
+</head>
+<body>
+    <!--title or heading for the website-->
+    <header>
+        <h1 id = "page-title">Book<span>Worm</span></h1>
+        <h2>A Virtual Library</h2>
+    </header>
+
+    <!--contains the control options (search, sort, filter section) as well as the book cards. i.e. the main content, the dashboard.-->
+    <div class = "wrapper">
+        <!--the control options-->
+        <div class = "search-bar" id = "form-container">
+            <!--search-bar-->
+            <form autocomplete = "off" action = "">
+                <input type = "text" id = "search-bar" placeholder = "Filter Books">
+            </form>
+            <!--sorting options-->
+            <form action = "" id = "sort-form">
+                <label for = "sort">Sort By: </label>
+                <select name = "sort" id = "sort-select">
+                    <option value = "newest">Newest</option>
+                    <option value = "oldest">Oldest</option>
+                    <option value = "a-z">A - Z</option>
+                    <option value = "z-a">Z - A</option>              
+                </select>
+            </form>
+            <!--already read? filter-->
+            <form action = "" id = "read-filter">
+                <div>view: </div>
+                <input type = "radio" id = "all" name = "view" value = "all" checked = "checked">
+                <label for = "all">all</label>
+                <input type = "radio" id = "read" name = "view" value = "read">
+                <label for = "read">read</label>
+                <input type = "radio" id = "not-read" name = "view" value = "not-read">
+                <label for = "not-read">not read</label>
+            </form>
+        </div>
+        <!--the book cards and the add book card-->
+        <div class = "user-results" id = "user-results">
+            <!--initially contains only the + add book card. on clicking it, it should show the add-book modal
+            we have created the toggleBookModal () utility function to toggle modals
+            this function is defined inside modals.js-->
+            <div class = "user-card add-card" id = "add-card" onclick = "toggleBookModal (addBookModal)">
+                <div class = "plus">+</div>
+            </div>
+        </div>
+    </div>
+
+    <!--this div contains the modal that will appear when + card is active-->
+    <div class="modal" id="add-book-modal">
+        <div class = "modal-header"><h1>Add a New Book</h1><button class = "close-button" onclick = "toggleBookModal ()">&times;</button></div>
+        <br>
+        <div class="modal-content">
+            <form action = "" id = "new-book" autocomplete = "off">
+                <div class = "form-control">
+                    <input type = "text" class = "inf  input input-alt" id = "title" name = "title" placeholder = "Title">
+                    <span class = "input-border input-border-alt"></span>
+                    <br><br>
+                </div>
+                <div class = "form-control">
+                    <input type = "text" name = "author" class = "inf input input-alt" placeholder = "Author (optional)">
+                    <span class = "input-border input-border-alt"></span>
+                    <br><br>
+                </div>
+                <div class = "form-control">
+                    <input type = "text" name = "isbn" class = "inf input input-alt" placeholder = "ISBN (optional)">
+                    <span class = "input-border input-border-alt"></span>
+                    <br><br>
+                </div>
+                <div id = "form-checkbox">
+                    <!--this arrangement is just for a stylised checkbox-->
+                    <label id = "cbox1">
+                        <input type = "checkbox" name = "cbox1" id = "cbox1" class = "inf">
+                        <svg viewBox="0 0 64 64" height="1em" width="1em">
+                            <path d="M 0 16 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 16 L 32 48 L 64 16 V 8 A 8 8 90 0 0 56 0 H 8 A 8 8 90 0 0 0 8 V 56 A 8 8 90 0 0 8 64 H 56 A 8 8 90 0 0 64 56 V 16" pathLength="575.0541381835938" class="path"></path>
+                        </svg>
+                    </label>
+                    <label> I've already read this book</label>
+                </div>
+                <br><br>
+                <div class = "add-button">
+                    <!--this arrangement is for a stylised button-->
+                    <button type = "submit" class = "cta" id = "add-book-button" value = "on/off">
+                        <span class="hover-underline-animation">Get Book</span>
+                        <svg id="arrow-horizontal" xmlns="http://www.w3.org/2000/svg" width="30" height="10" viewBox="0 0 46 16">
+                            <path id="Path_10" data-name="Path 10" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" transform="translate(30)"></path>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--this modal will appear when the book search form is submitted-->
+    <div class = "modal custom-button" id = "book-search-modal">
+        <div class = "modal-header">
+            <h1>Is this the book you're looking for?</h1>
+            <button class = "close-button" onclick = "toggleBookModal ()">&times;</button>
+        </div>
+        <br>
+        <!--this is just the template for the book search result filled with an arbirary book-->
+        <div id = "booksearch-img"><img src = "https://i.pinimg.com/474x/74/ef/c1/74efc1cb7b65a93efd058a6f3e738ff5.jpg" alt = ""></div>
+        <div class = "info" id = "booksearch-title">Dune</div>
+        <div class = "info" id = "booksearch-author">Frank Herbert</div>
+        <div class = "info" id = "booksearch-isbn">ISBN-10: 0441172717</div>
+        <form id = "button-holder" action = "">
+            <button id = "confirm">
+                <span class = "actual-text">&nbsp;Yes&nbsp;</span>
+                <span aria-hidden = "true" class = "front-text">&nbsp;Yes&nbsp;</span>
+            </button>
+            <button id = "show-all-results-button">
+                <span class = "actual-text">&nbsp;No&nbsp;</span>
+                <span aria-hidden = "true" class = "front-text">&nbsp;No&nbsp;</span>
+            </button>
+        </form>
+    </div>
+
+    <!--this modal will become active when the book found is not the book needed and a list of more suitable books is provided-->
+    <div class = "modal" id = "book-list-modal">
+        <div class = "modal-header">
+            <h1>Here are some other books that may match your search:</h1>
+            <button class = "close-button" onclick = "toggleBookModal ()">&times;</button>
+        </div>
+        <br>
+        <div id = "book-results-container"></div>
+        <form action = "">
+            <br><br>
+            <button id = "search-again">
+                <span class = "actual-text">&nbsp;Go Back&nbsp;</span>
+                <span aria-hidden = "true" class = "front-text">&nbsp;Go Back&nbsp;</span>
+            </button>
+        </form>
+    </div>
+
+    <!--this modal is shown when the required book is not found in book-search form-->
+    <div class="modal" id="error-modal">
+        <div class = "modal-header">
+            <h1></h1>
+            <button class = "close-button" onclick = "toggleBookModal ()">&times;</button>
+        </div>
+        <br>
+        <div class = "modal-content">
+            <h1>Sorry, we couldn't find any books from your search. Please try again.</h1>
+            <br><br>
+            <p>(Note that if you have entered the isbn, you may have success by entering only the isbn, without an author or book title.)</p>
+            <br><br>
+            <button id = "error-return">Back to search</button>
+        </div>
+    </div>
+
+    <!--this modal appears when the user wants to delete a book from thr user-results-->
+    <div class="modal" id="delete-modal">
+        <div class="modal-header"> 
+            <h1>Are you sure you want to delete this book from your library?</h1>
+            <button class = "close-button" onclick = "toggleBookModal ()">&times;</button>
+        </div>
+        <div class = "modal-content">
+            <!-- <h1>Are you sure you want to delete this book from your library?</h1> -->
+            <br><br>
+            <p>This action cannot be undone</p>
+            <br><br>
+            <form action = "">
+                <button id = "confirm-delete">
+                    <span class = "actual-text">&nbsp;Delete&nbsp;</span>
+                    <span aria-hidden = "true" class = "front-text">&nbsp;Delete&nbsp;</span>
+                </button>
+                <button id = "cancel-delete">
+                    <span class = "actual-text">&nbsp;Go Back&nbsp;</span>
+                    <span aria-hidden = "true" class = "front-text">&nbsp;Go Back&nbsp;</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!--this div is the div where all the modals get displayed. this div will contain the 
+    details of the active modal in it's class and data-target-->
+    <div id="overlay"></div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+.has-read {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox-btn {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.checkbox-btn input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkbox-btn label {
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(50%, 20%);
+    height: 15px; /* Adjust size as needed */
+    width: 15px; /* Adjust size as needed */
+    border: 1px solid var(--highlight);
+    border-radius: 2px; /* Optional: make it a square with rounded corners */
+    transition: 0.2s linear;
+    box-sizing: border-box; /* Ensure padding and borders are included in the element's total width and height */
+}
+
+/* Checkmark (tick) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px; /* Adjust size as needed */
+    height: 10px; /* Adjust size as needed */
+    border: solid var(--highlight);
+    filter: drop-shadow(0px 0px 10px var(--highlight));
+    border-width: 0 2px 2px 0;
+    transition: 0.2s linear;
+    transform: translate(-50%, -50%) rotate(-45deg) scale(0); /* Start with scale 0 */
+    box-sizing: border-box; /* Ensure padding and borders are included in the element's total width and height */
+}
+
+.checkbox-btn input:checked ~ .checkmark::after {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(45deg) scale(1); /* Rotate and scale to normal size */
+    animation: pulse 1s ease-in;
+}
+
+.checkbox-btn input:checked ~ .checkmark {
+    border-color: transparent;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) rotate(45deg) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) rotate(45deg) scale(1.6);
+    }
+}

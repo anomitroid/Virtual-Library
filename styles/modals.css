@@ -1,0 +1,576 @@
+:root {
+    --color1: #0d1b2a;
+    --color2: #0f1d2d;
+    --color3: #121f30;
+    --color4: #142134;
+    --color5: #172337;
+    --color6: #1b283d;
+    --color7: #202d43;
+    --color8: #243249;
+    --color9: #2b3c54;
+    --color10: #324560;
+    --color11: #3a506b;
+    --color12: #415a77;
+
+    --background: linear-gradient(to right bottom, var(--color1), var(--color2), var(--color3), var(--color4), var(--color5), var(--color6), var(--color7), var(--color8), var(--color9), var(--color10), var(--color11), var(--color12));
+    --highlight: #FFAF45;
+
+    --palette1: #0d1b2a;
+    --palette2: #1b263b;
+    --palette3: #1b263b;
+    --pallete4: #778da9;
+    --palette5: #e0e1dd;
+
+	--shader-3: #0d1b2a;
+	--shader-2: #031c27;
+	--shader-1: #001d22;
+	--shader0: #021d1b;
+	--shader1: #081C15;
+	--shader2: #1B4332;
+	--shader3: #2D6A4F;
+	--shader4: #40916C;
+	--shader5: #52B788;
+	--shader6: #74C69D;
+	--shader7: #95D5B2;
+	--shader8: #B7E4C7;
+	--shader9: #D8F3DC;
+
+	--shader: linear-gradient(to right top, #b7094c, #A01A58, #892B64, #723C70, #5C4D7D, #455E89, #2E6F95, #1780A1, #0091AD);
+	--color-gar: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: ease all 0.5s;
+    color: var(--palette4);
+    border-radius: 20px;
+    z-index: 20;
+    background-color: var(--palette1);
+    width: 500px;
+    max-width: 80%;
+    padding: 40px;
+}
+
+.modal.active {
+    transform: translate(-50%, -50%);
+    transition: ease all 0.5s;
+}
+
+.modal h1 {
+	font-size: x-large;
+}
+
+button {
+	cursor: pointer;
+	font-family: Montserrat, sans sans-serif;
+	width: 50px;
+	height: 30px;
+}
+
+.modal-header {
+	display: flex;
+	padding: 10px 15px;
+	justify-content: space-between;
+	align-items: center;
+	font-family: Montserrat, sans sans-serif;
+}
+
+.modal-header button {
+	border: none;
+	background: transparent;
+	font-size: 20px;
+	color: var(--palette4);
+}
+
+.modal-content {
+	display: flex;
+	flex-direction: column;
+}
+
+#new-book {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.modal-content button {
+	margin: 5px;
+	width: 120px;
+	height: 30px;
+}
+
+#add-book-modal {
+	width: 300px;
+	height: 450px;
+}
+
+#add-book-modal input[type = "checkbox"] {
+	height: auto;
+}
+
+#add-book-modal input[type = "text"] {
+    all: unset;
+}
+
+#add-book-modal input[type = "text"]::placeholder {
+	color: var(--pallete4);
+}
+
+#add-book-modal input[type = "text"] {
+	font-size: 0.9rem;
+	background-color: transparent;
+	width: 100%;
+	box-sizing: border-box;
+	padding-inline: 0.5rem;
+	padding-block: 0.7rem;
+	border: none;
+	border-bottom: 1px solid var(--color5);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#add-book-modal span {
+	transform: translateY(-13.5px);
+}
+
+.input-border {
+	position: absolute;
+	background: var(--color12);
+	width: 0%;
+	height: 2px;
+	bottom: 0;
+	left: 0;
+	transition: width 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+#add-book-modal input[type = "text"]:focus {
+	outline: none;
+}
+
+#add-book-modal input[type = "text"]:focus + .input-border {
+	width: 100%;
+}
+
+.form-control {
+	position: relative;
+	--width-of-input: 300px;
+}
+
+.input-alt {
+	font-size: 1.2rem;
+	padding-inline: 1em;
+	padding-block: 0.8em;
+  	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.input-border-alt {
+	height: 1px;
+	background-image: var(--shader);
+	transition: width 0.4s cubic-bezier(0.42, 0, 0.58, 1.00);
+}
+  
+.input-alt:focus + .input-border-alt {
+	width: 100%;
+}
+
+#form-checkbox {
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
+}
+
+#form-checkbox label:last-of-type {
+	padding-right: 60px;
+}
+
+#cbox1 {
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+
+#cbox1 input {
+	display: none;
+}
+
+#cbox1 svg {
+	overflow: visibles;
+}
+
+.path {
+	fill: none;
+	stroke: var(--pallete4);
+	stroke-width: 6;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
+	stroke-dasharray: 241 9999999;
+	stroke-dashoffset: 0;
+}
+
+#cbox1 input:checked ~ svg .path {
+	stroke-dasharray: 70.5096664428711 9999999;
+	stroke-dashoffset: -262.2723388671875;
+}
+
+.add-button {
+	display: flex;
+	white-space: nowrap;
+	align-content: center;
+	justify-content: center;
+}
+
+.cta {
+	border: none;
+	background: none;
+	cursor: pointer;
+	transform: translateX(-10px);
+}
+
+.cta span {
+	white-space: nowrap;
+	padding-bottom: 7px;
+	letter-spacing: 4px;
+	font-size: 14px;
+	padding-right: 15px;
+	text-transform: uppercase;
+	color: var(--pallete4);
+}
+
+.cta svg {
+	transform: translateX(-8px);
+	transition: all 0.3s ease;
+	fill: var(--pallete4);
+}
+
+.cta:hover svg {
+	transform: translateX(0);
+}
+
+.cta:active svg {
+	transform: scale(0.9);
+}
+
+.hover-underline-animation {
+	position: relative;
+	color: #000000;
+	padding-bottom: 20px;
+}
+
+.hover-underline-animation:after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	transform: scaleX(0);
+	height: 1.5px;
+	bottom: 0;
+	left: 0;
+	background: var(--shader);
+	transform-origin: bottom right;
+	transition: transform 0.25s ease-out;
+  }
+  
+.cta:hover .hover-underline-animation:after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
+}
+
+#delete-modal {
+	padding: 20px;
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+}
+
+#delete-modal .modal-content {
+	padding: 30px;
+}
+
+#delete-modal form {
+	display: flex;
+	gap: 10px;
+}
+
+#confirm-delete, #cancel-delete, #confirm, #show-all-results-button, #search-again {
+    position: relative;
+    display: flex;
+	flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: transparent;
+    --ani-color: rgba(95, 3, 244, 0);
+    text-transform: uppercase;
+    color: var(--pallete4);
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden; 
+    font-weight: 400; 
+    font-size: 16px; 
+    font-family: Montserrat, sans-serif; 
+}
+
+#search-again {
+	transform: translate(15px, 5px);
+}
+
+.actual-text, .front-text {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: inherit; 
+    font-family: inherit; 
+    font-weight: inherit; 
+    white-space: nowrap; 
+}
+
+.front-text {
+    width: 0; 
+    background: var(--color-gar);
+    -webkit-background-clip: text; 
+    background-clip: text;
+    color: transparent; 
+    background-size: 200%;
+    overflow: hidden;
+    transition: width 1s; 
+    animation: ani 8s infinite; 
+    border-bottom: 1px solid transparent;
+}
+
+#confirm-delete:hover .front-text, #cancel-delete:hover .front-text, #confirm:hover .front-text, #show-all-results-button:hover .front-text, #search-again:hover .front-text {
+    width: 80%; 
+    border-bottom: 1px solid #03a9f4;
+    -webkit-text-stroke: 0.5px var(--ani-color); 
+}
+
+#search-again:hover .front-text {
+	width: 70%;
+}
+
+#confirm-delete:hover .front-text {
+	width: 69%;
+}
+
+#show-all-results-button:hover .front-text {
+	width: 70%;
+}
+
+@keyframes ani {
+    0% {
+        background-position: 0%;
+    }
+
+    50% {
+        background-position: 400%;
+    }
+
+    100% {
+        background-position: 0%;
+    }
+}
+
+#book-search-modal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+	gap: 10px;
+}
+
+#booksearch-img img{
+    width: 130px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+    border: 1.5px solid var(--palette5);
+    box-sizing: border-box;
+    padding: 3px;
+	transition: all 0.5s;
+}
+
+#booksearch-img {
+	transition: all 0.5s;
+}
+
+#booksearch-img:hover {
+	transform: scale(1.05);
+}
+
+.info {
+    color: var(--pallete4);
+    transition: color 0.5s ease; 
+	margin: 0;
+}
+
+#booksearch-img:hover ~ .info {
+    color: var(--palette5); 
+}
+
+#booksearch-author{
+    text-align: center;
+}
+
+#booksearch-title{
+    text-align: center;
+}
+
+#button-holder {
+	margin-top: 15px;
+	display: flex;
+	gap: 20px;
+}
+
+#book-list-modal {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 550px;
+    width: 500px;
+    padding: 15px;   
+}
+
+#book-list-modal form {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    
+}
+
+#book-list-modal button {
+    width: 120px;
+    height: 40px;
+}
+
+#book-results-container {
+    overflow-y: scroll;
+    background: var(--palette2);
+    border-radius: 10px;
+    height:700px;
+}
+
+#book-results-container::-webkit-scrollbar {
+	width: 5px;
+}
+
+.list-item-container {
+	font-size: 0.8rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 5px;
+	padding: 5px;
+}
+
+.list-item-container img {
+    width: 50px;
+	border-radius: 10px;
+}
+
+.list-item-container:hover {
+    cursor: pointer;
+    background-color: var(--color10);
+	border-radius: 10px;
+}
+
+.list-item-container .list-item-author {
+    width: 75px;
+    flex-wrap: wrap;
+    overflow-wrap: break-word;
+}
+
+.list-item-title {
+    width: 140px; 
+    flex-wrap: wrap;
+}
+
+.list-item-thumb {
+    width: 50px;
+    overflow: hidden;
+}
+
+#overlay {
+	position: fixed;
+	opacity: 0;
+	top: 0;
+	left: 0;
+	right: 0; 
+	bottom: 0; 
+	pointer-events: none;
+	background: transparent;
+}
+
+#overlay:active {
+	opacity: 1; 
+	pointer-events: all;
+	z-index: 19;
+	background: transparent;
+}
+
+@media only screen and (max-width: 759px) {
+	.modal {
+		max-width: 350px;
+	}
+	h1 {
+		font-size: 20px !important;
+	}
+	h2 {
+		font-size: 15px !important;
+	}
+}
+
+@media only screen and (max-width: 559px) {
+	#book-list-modal {
+		max-width: 475px;
+		max-width: 300px;
+		padding: 10px;
+	}
+	#add-book-modal {
+        max-width: 250px;
+        height: 375px;
+        padding: 10px;
+        top: 40%;
+    }
+    #add-book-modal br {
+        display: none;
+    }
+    #add-book-modal .modal-header {
+        margin-bottom: 10px;
+    }
+    .inf {
+        margin: 10px;
+    }
+    .title {
+		margin-top: 5px; 
+	}
+    #book-search-modal {
+        max-width: 200px;
+        max-height: 425px;
+        padding: 50px;
+    }
+	#book-search-modal button {
+        width: 70px;
+        margin: 10px;
+    }
+    .add-button {
+        display: flex;
+        justify-content: center;
+    }
+    .modal input {
+        width: 90% !important;
+    }
+    h1 {
+        font-size: 19px;
+    }
+    .list-item-title {
+        width: 100px;   
+    }
+    .list-item-container {
+        margin-top: 20px;
+    }
+    #error-modal {
+        max-width: 200px;
+        padding: 30px;
+    }
+}
